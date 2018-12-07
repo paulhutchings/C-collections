@@ -8,7 +8,6 @@ typedef struct node {
     struct node *next;
 } Node;
 
-int size(const void* collection);
 int isEmpty(const void* collection);
 int contains(const void* collection, void* item);
 

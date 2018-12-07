@@ -1,9 +1,7 @@
 #ifndef STACK_H
 #define STACK_H
 
-extern const int STACK = sizeof(Vector);
-
-typedef struct vector Stack;
+extern const int STACK = sizeof(List);
 
 Stack* newStack();
 void push(struct stack* self, const void* item);

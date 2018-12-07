@@ -1,25 +1,21 @@
-#include "collections.h"
-#include "object.h"
-#include "new.h"
+//Stack "class", a subset of the list featuring the push, pop, and peek operations
 #include "stack.h"
-#include <stdlib.h>
-#include "vector.h"
+#include "list.h"
+
+typedef List Stack;
 
 Stack* newStack(){
-    return newVector();
+    return newList();
 }
 
-void push(Stack* self, void* item){
-    add(self, item);
+void push(Stack* stack, void* item){
+    add(stack, item);
 }
 
-void* pop(Stack* self){
-    
+void* pop(Stack* stack){
+    return removeAt(stack, stack->size - 1);
 }
 
-void* peek(Stack* self){
-    
+void* peek(Stack* stack){
+    return get(stack, stack->size - 1);
 }
-
-
-
