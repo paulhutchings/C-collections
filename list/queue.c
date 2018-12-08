@@ -1,7 +1,6 @@
 #include "queue.h"
 #include "list.h"
 #include "linkedlist.h"
-#include "new.h"
 
 typedef LinkedList Queue;
 
