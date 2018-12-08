@@ -1,8 +1,7 @@
+//Queue "class" based on the Linked List implementation
 #include "queue.h"
 #include "list.h"
 #include "linkedlist.h"
-
-typedef LinkedList Queue;
 
 //Creates a new empty queue
 Queue* newQueue(){
