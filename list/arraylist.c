@@ -17,36 +17,38 @@ List* newList(){
 }
 
 //Adds an item to the end of the list
-int add(List* list, void* item){
+void add(void* list, void* item){
+    List* this = (List*)list;
     //reallocate the data array if full
-    if (list->size == list->capacity){
+    if (this->size == this->capacity){
         //make the new allocation size 150% of what the current capacity is
-        int newCapacity = list->capacity + (list->capacity / 2);
-        list->data = realloc(list->data, sizeof(void*) * newCapacity);
-        list->capacity = newCapacity;
+        int newCapacity = this->capacity + (this->capacity / 2);
+        this->data = realloc(this->data, sizeof(void*) * newCapacity);
+        this->capacity = newCapacity;
     }
-    list->data[list->size] = item;
+    this->data[this->size] = item;
 }
 
 //Removes and returns the item at the specified index
-void* removeAt(List* list, int index){
-    if (index >= 0 && index < list->size){
-        void* toReturn = list->data[index];
+void* removeAt(void* list, int index){
+    List* this = (List*)list;
+    if (index >= 0 && index < this->size){
+        void* toReturn = this->data[index];
         //shift items in array over
-        for(size_t i = index; i < list->size; i++)
+        for(size_t i = index; i < this->size; i++)
         {
-            list->data[index] = list->data[index + 1];
+            this->data[index] = this->data[index + 1];
         }
         //update last item pointer and list size
-        list->data[index] = NULL;
-        list->size--;
+        this->data[index] = NULL;
+        this->size--;
 
         //check if array is small enough to be downsized. This occurs if the array is less than half full
-        if (list->size < list->capacity / 2){
+        if (this->size < this->capacity / 2){
             //downsized capacity is 1/3 less, so that downsizing and upsizing shrink/grow the array by simila amounts
-            int newCapacity = list->capacity - (list->capacity / 3);
-            list->data = realloc(list->data, sizeof(void*) * newCapacity);
-            list->capacity = newCapacity;
+            int newCapacity = this->capacity - (this->capacity / 3);
+            this->data = realloc(this->data, sizeof(void*) * newCapacity);
+            this->capacity = newCapacity;
         }
         return toReturn;
     }
@@ -54,15 +56,16 @@ void* removeAt(List* list, int index){
 }
 
 //Removes and returns the specified item from the list
-void* remove(List* list, void* item){
+void* remove(void* list, void* item){
     return removeAt(list, indexOf(list, item));
 }
 
 //Returns the index of the given item's location in the list, or -1 if the item is not found
-int indexOf(List* list, void* item){
-    for(size_t i = 0; i < list->size; i++)
+int indexOf(void* list, void* item){
+    List* this = (List*)list;
+    for(size_t i = 0; i < this->size; i++)
     {
-        if (isEqual(item, list->data[i])){
+        if (isEqual(item, this->data[i])){
             return i;
         }
     }
@@ -75,22 +78,24 @@ int isEmpty(void* collection){
 
 //Returns 1 if the list contains the specified item, 0 otherwise
 int contains(void* collection, void* item){
-    return indexOf((List*)collection, item) == -1;
+    return indexOf(collection, item) == -1;
 }
 
 //Returns the item at the specified index without removing it
-void* get(List* list, int index){
-    if (index >= 0 && index < list->size){
-        return list->data[index];
+void* get(void* list, int index){
+    List* this = (List*)list;
+    if (index >= 0 && index < this->size){
+        return this->data[index];
     }
     else return NULL;
 }
 
 //Modifies the element in the list at the given index, and returns the item that was previously there
-void* set(List* list, int index, void* element){
-    if (index >= 0 && index < list->size){
-        void* toReturn = list->data[index];
-        list->data[index] = element;
+void* set(void* list, int index, void* element){
+    List* this = (List*)list;
+    if (index >= 0 && index < this->size){
+        void* toReturn = this->data[index];
+        this->data[index] = element;
         return toReturn;
     }
     else return NULL;

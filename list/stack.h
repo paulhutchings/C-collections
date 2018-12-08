@@ -1,11 +1,12 @@
 #ifndef STACK_H
 #define STACK_H
 
-extern const int STACK = sizeof(List);
+typedef struct list Stack;
+extern const size_t STACK = sizeof(List);
 
 Stack* newStack();
-void push(struct stack* self, const void* item);
-void* pop(struct stack *self);
-void* peek(struct stack *self);
+void push(Stack* self, const void* item);
+void* pop(Stack* self);
+void* peek(Stack* self);
 
 #endif

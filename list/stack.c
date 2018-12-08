@@ -2,7 +2,7 @@
 #include "stack.h"
 #include "list.h"
 
-typedef List Stack;
+// typedef List Stack;
 
 Stack* newStack(){
     return newList();

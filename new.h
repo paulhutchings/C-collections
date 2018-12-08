@@ -2,7 +2,7 @@
 #ifndef NEW_H
 #define NEW_H
 
-void* new(int datasize);
+void* new(size_t datasize);
 void delete(void* object);
 
 #endif

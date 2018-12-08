@@ -1,5 +1,6 @@
 #include "new.h"
+#include <stdlib.h>
 
-void* new(int datasize){
+void* new(size_t datasize){
     return malloc(datasize);
 }
