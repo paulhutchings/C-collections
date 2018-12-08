@@ -41,7 +41,6 @@ void* removeAt(void* list, int index){
         }
         //update last item pointer and list size
         this->data[index] = NULL;
-        this->size--;
 
         //check if array is small enough to be downsized. This occurs if the array is less than half full
         if (this->size < this->capacity / 2){
@@ -50,6 +49,7 @@ void* removeAt(void* list, int index){
             this->data = realloc(this->data, sizeof(void*) * newCapacity);
             this->capacity = newCapacity;
         }
+        this->size--;
         return toReturn;
     }
     else return NULL;

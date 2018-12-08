@@ -2,9 +2,10 @@
 #define QUEUE_H
 
 typedef struct linkedlist Queue;
-extern const size_t QUEUE = sizeof(LinkedList);
+extern const size_t QUEUE = sizeof(Queue);
 
 Queue* newQueue();
-void* poll(LinkedList* list);
+void* poll(Queue* q);
+void* peek(Queue* q);
 
 #endif

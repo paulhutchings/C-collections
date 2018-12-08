@@ -73,6 +73,7 @@ void* removeAt(void* list, int index){
         void* toReturn = toRemove->data;
         free(toRemove);
         free(this);
+        this->size--;
         return toReturn;
     }
     free(this);

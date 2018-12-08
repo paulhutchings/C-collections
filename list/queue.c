@@ -11,10 +11,19 @@ Queue* newQueue(){
 }
 
 //Adds an item to the end of the queue
-void add(void* list, void* item){
-    Queue* this = (Queue*)list;
-    Node* end = new(NODE);
-    end->data = item;
-    end->next = NULL;
-    
+
+//removes the item at the front of the queue
+void* poll(Queue* q){
+    return removeAt(q, 0);
+    // Node* toRemove = q->head;
+    // void* toReturn = toRemove->data;
+    // q->head = q->head->next;
+    // free(toRemove);
+    // q->size--;
+    // return toReturn;
+}
+
+//returns the next item in the front of the queue without removing it
+void* peek(Queue* q){
+    return get(q, 0);
 }
