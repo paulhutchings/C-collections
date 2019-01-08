@@ -1,4 +1,4 @@
-#include "../list.h"
+#include "../list/list.h"
 #ifndef STACK_H
 #define STACK_H
 

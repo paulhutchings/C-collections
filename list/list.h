@@ -23,17 +23,17 @@ typedef struct list {
     int (*isEqual)(void* a, void* b); 
 } List;
 
-//passed to the general new() function defined in new.h
 #define LIST sizeof(List)
 
 List* newList(void* type);
-void add(void* list, void* item);
+void add_L(List* list, void* item);
 // void* remove(void* list, void* item);
-void* removeAt(void* list, int index);
-void* get(void* list, int index);
-void* set(void* list, int index, void* element);
-int indexOf(void* list, void* item);
+void* removeAt_L(List* list, int index);
+void* get_L(List* list, int index);
+void* set_L(List* list, int index, void* element);
+int indexOf_L(List* list, void* item);
 void reallocate(List* list, int operation);
 void deleteList(List* list);
+int isEmpty_L(List* list);
 
 #endif

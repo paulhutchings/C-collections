@@ -1,6 +1,5 @@
 //array-based list implementation
 #include <stdlib.h>
-#include "../collections.h"
 #include "list.h"
 #include "../object.h"
 
@@ -15,34 +14,32 @@ List* newList(void* type){
 }
 
 //Adds an item to the end of the list
-void add(void* list, void* item){
-    List* this = (List*)list;
+void add_L(List* list, void* item){
     //reallocate the data array if full
-    if (this->size == this->capacity){
-        reallocate(this, GROW);
+    if (list->size == list->capacity){
+        reallocate(list, GROW);
     }
-    this->data[this->size] = item;
-    this->size++;
+    list->data[list->size] = item;
+    list->size++;
 }
 
 //Removes and returns the item at the specified index
-void* removeAt(void* list, int index){
-    List* this = (List*)list;
-    if (index >= 0 && index < this->size){
-        void* toReturn = this->data[index];
+void* removeAt_L(List* list, int index){
+    if (index >= 0 && index < list->size){
+        void* toReturn = list->data[index];
         //shift items in array over
-        for(size_t i = index; i < this->size; i++)
+        for(size_t i = index; i < list->size; i++)
         {
-            this->data[index] = this->data[index + 1];
+            list->data[index] = list->data[index + 1];
         }
         //update last item pointer and list size
-        this->data[index] = NULL;
+        list->data[index] = NULL;
 
         //check if array is small enough to be downsized. This occurs if the array is less than half full
-        if (this->size < this->capacity / 2){
-            reallocate(this, SHRINK);
+        if (list->size < list->capacity / 2){
+            reallocate(list, SHRINK);
         }
-        this->size--;
+        list->size--;
         return toReturn;
     }
     else return NULL;
@@ -54,41 +51,38 @@ void* removeAt(void* list, int index){
 // }
 
 //Returns the index of the given item's location in the list, or -1 if the item is not found
-int indexOf(void* list, void* item){
-    List* this = (List*)list;
-    for(size_t i = 0; i < this->size; i++)
+int indexOf_L(List* list, void* item){
+    for(size_t i = 0; i < list->size; i++)
     {
-        if ((this->isEqual)(item, this->data[i])){
+        if ((list->isEqual)(item, list->data[i])){
             return i;
         }
     }
     return -1;
 }
 
-int isEmpty(void* collection){
-    return ((List*)collection)->size == 0;
+int isEmpty_L(List* list){
+    return list->size == 0;
 }
 
-//Returns 1 if the list contains the specified item, 0 otherwise
-int contains(void* collection, void* item){
-    return indexOf(collection, item) == -1;
-}
+// //Returns 1 if the list contains the specified item, 0 otherwise
+// int contains(void* collection, void* item){
+//     return indexOf(collection, item) == -1;
+// }
 
 //Returns the item at the specified index without removing it
-void* get(void* list, int index){
-    List* this = (List*)list;
-    if (index >= 0 && index < this->size){
-        return this->data[index];
+void* get_L(List* list, int index){
+    if (index >= 0 && index < list->size){
+        return list->data[index];
     }
     else return NULL;
 }
 
 //Modifies the element in the list at the given index, and returns the item that was previously there
-void* set(void* list, int index, void* element){
-    List* this = (List*)list;
-    if (index >= 0 && index < this->size){
-        void* toReturn = this->data[index];
-        this->data[index] = element;
+void* set_L(List* list, int index, void* element){
+    if (index >= 0 && index < list->size){
+        void* toReturn = list->data[index];
+        list->data[index] = element;
         return toReturn;
     }
     else return NULL;
@@ -113,7 +107,5 @@ void reallocate(List* list, int operation){
 //deletes the provided list and frees the memory. NOTE - does not delete the item references
 void deleteList(List* list){
     free(list->data);
-    free(&list->size);
-    free(&list->capacity);
     free(list);
 }
