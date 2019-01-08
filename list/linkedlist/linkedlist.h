@@ -16,7 +16,7 @@ typedef struct linkedlist {
     int size;
 } LinkedList;
 
-LinkedList* newLinkedList();
+LinkedList* new(size_t datasize);
 Node* getNode(LinkedList* list, int index);
 
 #endif

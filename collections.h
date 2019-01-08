@@ -1,7 +1,7 @@
 #ifndef COLLECTIONS_H
 #define COLLECTIONS_H
 
-int isEmpty(const void* collection);
-int contains(const void* collection, void* item);
+int isEmpty(void* collection);
+int contains(void* collection, void* item);
 
 #endif
