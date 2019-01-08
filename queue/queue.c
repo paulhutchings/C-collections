@@ -1,27 +1,23 @@
 //Queue "class" based on the Linked List implementation
 #include "queue.h"
-#include "list.h"
-#include "linkedlist.h"
+#include "../linkedlist/linkedlist.h"
 
 //Creates a new empty queue
-Queue* newQueue(){
-    return newLinkedList();
+Queue* newQueue(void* type){
+    return (Queue*)newLinkedList(type);
 }
 
 //Adds an item to the end of the queue
+void offer(Queue* q, void* item){
+    add_LL(q, item);
+}
 
 //removes the item at the front of the queue
 void* poll(Queue* q){
-    return removeAt(q, 0);
-    // Node* toRemove = q->head;
-    // void* toReturn = toRemove->data;
-    // q->head = q->head->next;
-    // free(toRemove);
-    // q->size--;
-    // return toReturn;
+    return removeAt_LL(q, 0);
 }
 
 //returns the next item in the front of the queue without removing it
-void* peek(Queue* q){
-    return get(q, 0);
+void* peekQ(Queue* q){
+    return get_LL(q, 0);
 }

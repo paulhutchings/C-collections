@@ -1,11 +1,13 @@
+#include "../linkedlist/linkedlist.h"
 #ifndef QUEUE_H
 #define QUEUE_H
 
-typedef struct linkedlist Queue;
-extern const size_t QUEUE = sizeof(Queue);
+typedef LinkedList Queue;
+#define QUEUE sizeof(Queue)
 
-Queue* newQueue();
+Queue* newQueue(void* type);
+void offer(Queue* q, void* item);
 void* poll(Queue* q);
-void* peek(Queue* q);
+void* peekQ(Queue* q);
 
 #endif
